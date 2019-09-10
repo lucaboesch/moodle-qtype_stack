@@ -38,6 +38,13 @@ class qtype_stack_renderer extends qtype_renderer {
         $response = $qa->get_last_qt_data();
 
         $questiontext = $question->questiontextinstantiated;
+
+        // Now format the questiontext.
+        $questiontext = $question->format_text(
+                stack_maths::process_display_castext($questiontext, $this),
+                $question->questiontextformat,
+                $qa, 'question', 'questiontext', $question->id);
+
         // Replace inputs.
         $inputstovaldiate = array();
         $qaid = null;
@@ -76,12 +83,6 @@ class qtype_stack_renderer extends qtype_renderer {
             }
             $questiontext = str_replace("[[feedback:{$index}]]", $feedback, $questiontext);
         }
-
-        // Now format the questiontext.  This should be done after the subsitutions of inputs and PRTs.
-        $questiontext = $question->format_text(
-                stack_maths::process_display_castext($questiontext, $this),
-                $question->questiontextformat,
-                $qa, 'question', 'questiontext', $question->id);
 
         // Initialise automatic validation, if enabled.
         if ($qaid && stack_utils::get_config()->ajaxvalidation) {
