@@ -146,7 +146,7 @@ echo html_writer::tag('form',
             html_writer::tag('p', html_writer::tag('textarea', $string,
                     array('cols' => 100, 'rows' => $stringlen, 'name' => 'cas'))) .
             html_writer::tag('p', html_writer::empty_tag('input',
-                    array('type' => 'submit', 'value' => stack_string('chat')))),
+                    array('type' => 'submit', 'value' => stack_string('chat'), 'class' => 'btn btn-primary'))),
         array('action' => $PAGE->url, 'method' => 'post'));
 
 if ($string) {
